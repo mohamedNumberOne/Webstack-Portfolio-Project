@@ -11,9 +11,11 @@ class MessageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function show_msg()
     {
-        //
+        $all_msg = Message::all() ;
+        return view("show_msgs" , compact('all_msg') ) ;
+
     }
 
     /**

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- 
+
 
 Route::get('/', [ProjectController::class, 'welcome_all_pro'])->name("/");
 
@@ -40,6 +40,9 @@ Route::prefix("admin")->middleware(["auth", "is_admin"])->group(function () {
     Route::get('/add_project', [ProjectController::class, 'index'])->name("add_project");
     Route::post('/add_project', [ProjectController::class, 'store'])->name("store_project");
     Route::post('/delete_project/{id}', [ProjectController::class, 'destroy'])->name("delete_project");
+
+    // msg
+    Route::get("/show_messages", [MessageController::class, 'show_msg'])->name('show_messages');
 });
 
 // project  

@@ -7,7 +7,7 @@
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('/') }}">
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />  --}}
-                        <img src="{{asset('css/logo.png')}}" alt="logo"  width="40px" class="mr-5" > 
+                        <img src="{{ asset('css/logo.png') }}" alt="logo" width="40px" class="mr-5">
                     </a>
                 </div>
 
@@ -31,9 +31,12 @@
                         <x-nav-link :href="route('show_all_projects')" :active="request()->routeIs('show_all_projects')">
                             {{ __('Our Works') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('show_messages')" :active="request()->routeIs('show_messages')">
+                            {{ __('Messages') }}
+                        </x-nav-link>                        
                     @endauth
 
-                    
+
 
                 </div>
             </div>
@@ -124,33 +127,37 @@
                 <x-responsive-nav-link :href="route('show_all_projects')" :active="request()->routeIs('show_all_projects')">
                     {{ __('Our Works') }}
                 </x-responsive-nav-link>
-            </div>
-        @endauth
-        @auth
-            <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
-                <div class="px-4">
-                    <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
-
-                <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')">
-                        {{ __('Profile') }}
+                <div class="pt-2 pb-3 space-y-1">
+                    <x-responsive-nav-link :href="route('show_messages')" :active="request()->routeIs('show_messages')">
+                        {{ __('Messages') }}
                     </x-responsive-nav-link>
-
-                    <!-- Authentication -->
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                            {{ __('Log Out') }}
-                        </x-responsive-nav-link>
-                    </form>
                 </div>
-            </div>
-        @endauth
-    </div>
+            @endauth
+            @auth
+                <!-- Responsive Settings Options -->
+                <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
+                    <div class="px-4">
+                        <div class="font-medium text-base text-gray-800 dark:text-gray-200">{{ Auth::user()->name }}</div>
+                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    </div>
+
+                    <div class="mt-3 space-y-1">
+                        <x-responsive-nav-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-responsive-nav-link>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                        this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-responsive-nav-link>
+                        </form>
+                    </div>
+                </div>
+            @endauth
+        </div>
 </nav>

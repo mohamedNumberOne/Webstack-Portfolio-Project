@@ -305,7 +305,7 @@
                                 <a href="{{ asset('storage/' . $project->project_photo) }}"
                                     data-gallery="portfolioGallery" class="portfolio-lightbox">
                                     <div class="work-img">
-                                        <img src="{{ asset('storage/' . $project->project_photo) }}" alt=""
+                                        <img src="{{ asset('storage/' . $project->project_photo) }}" alt="img"
                                             class="img-fluid" width="100%"  style="   height: 250px; " />
                                     </div>
                                 </a>
