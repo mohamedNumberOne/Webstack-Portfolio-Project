@@ -8,6 +8,10 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\Product;
+ 
+
+
 class ProjectController extends Controller
 {
     /**
@@ -24,8 +28,34 @@ class ProjectController extends Controller
     public function show_all_projects()
     {
         $all_projects = Project::all();
+
         return view("projects.show_all_projects", compact('all_projects'));
     }
+
+
+    public function all_products()
+    {
+        return  $all_products = Product::all();
+    }
+
+
+    public function  welcome_all_pro()
+    {
+
+        $all_products = $this->all_products();
+        $all_projects = Project::limit(3)->get();
+
+        return view('welcome', compact('all_projects', 'all_products'));
+    }
+
+
+
+    // public function test()
+    // {
+    //     $all_projects = $this -> show_all_projects() ;
+
+    //     return view("projects.show_all_projects", compact('all_projects'));
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -52,13 +82,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource. Project $project ,
      */
-    public function display_project(  $id)
+    public function display_project($id)
     {
-        // $project = Project::find($id);
 
 
-
-       
         $user = User::find(Auth::user()->id);
         $project = Project::findOrFail($id);
 
@@ -68,11 +95,14 @@ class ProjectController extends Controller
 
         $users = $project->users; // Récupère les utilisateurs ayant commenté le projet, y compris les commentaires 
 
-        return view('projects.info_pro', compact('project' , "users" ));
+        return view('projects.info_pro', compact('project', "users"));
+        //
 
-        
- 
+
+
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -86,8 +116,6 @@ class ProjectController extends Controller
         $user =  User::find(Auth::user()->id); // L'utilisateur qui commente
 
         $project = Project::find($id); // Le projet sur lequel l'utilisateur commente 
-
-
 
         $user->projects()->attach($project->id, ['comment' => $comment]);
 
@@ -105,8 +133,14 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy($id)
     {
-        //
+        $pro =  Project::find($id);
+
+
+        $pro->delete();
+        unlink("storage/" . $pro->project_photo);
+
+        return redirect()->back();
     }
 }

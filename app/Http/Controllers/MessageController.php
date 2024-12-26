@@ -27,9 +27,20 @@ class MessageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMessageRequest $request)
+    public function add_msg(StoreMessageRequest $request)
     {
-        //
+ 
+        Message::create([
+            'name' => $request ->name,
+            'email' => $request ->email,
+            'subject' => $request ->subject ,
+            'message' => $request->message,
+            'about' => $request->about,
+            'ip_user' => $request-> ip()  
+
+        ]) ;
+       return redirect()-> back()-> with("success" , "The message was sent successfully !  " ) ;
+
     }
 
     /**

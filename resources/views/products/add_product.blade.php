@@ -27,7 +27,7 @@
                     <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
 
                         <h1 class="text-lg text-center mt-5 mb-5 fs-2 ">
-                           <i class="fa-solid fa-dollar-sign"></i>
+                            <i class="fa-solid fa-dollar-sign"></i>
                             Add Product
                         </h1>
 
@@ -105,6 +105,7 @@
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -112,25 +113,25 @@
     </div>
 
     <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        // (() => {
-        //   'use strict'
+        Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+          'use strict'
 
-        //   // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        //   const forms = document.querySelectorAll('.needs-validation')
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          const forms = document.querySelectorAll('.needs-validation')
 
-        //   // Loop over them and prevent submission
-        //   Array.from(forms).forEach(form => {
-        //     form.addEventListener('submit', event => {
-        //       if (!form.checkValidity()) {
-        //         event.preventDefault()
-        //         event.stopPropagation()
-        //       }
+          // Loop over them and prevent submission
+          Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
 
-        //       form.classList.add('was-validated')
-        //     }, false)
-        //   })
-        // })()
+              form.classList.add('was-validated')
+            }, false)
+          })
+        })()
     </script>
 </body>
 

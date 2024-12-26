@@ -46,7 +46,7 @@
                                             </p>
 
                                             <p class="text-start  ">
-                                                <i class="fa-solid fa-calendar-days"></i> {{ $project->created_at }}
+                                                <i class="fa-solid fa-calendar-days"></i> {{ $project->created_at ->format('Y-m-d') }}
 
                                             </p>
                                         </div>
@@ -62,34 +62,42 @@
                                     <div class="   mt-5 ">
                                         <h2 class="h2"> <i class="fa-solid fa-comments"></i> | Comments </h2>
 
-                                        @if ( session() -> has('success')  )
-                                          <div class="alert alert-success">  {{  session("success")  }} </div>
+                                        @if (session()->has('success'))
+                                            <div class="alert alert-success"> {{ session('success') }} </div>
                                         @endif
 
                                         <div class="container   text-start">
-                                            <ul class="list-group">
-                                                <li class="list-group-item active" aria-current="true">
-                                                    All Comments :
-                                                </li>
-                                                @foreach ($users as $user)
-                                                    <li class="list-group-item">
-                                                        <i class="fa-regular fa-comment"></i>
-                                                        <span class="badge rounded-pill text-bg-primary ">
-                                                            {{ $user->pivot->created_at->format('Y-m-d') }}
-                                                        </span>
-                                                        
-                                                        <span class=" badge bg-success rounded-pill " > {{ $user->name }} </span> : {{ $user->pivot->comment }}
+                                            @if (count($users) > 0)
+
+
+                                                <ul class="list-group">
+                                                    <li class="list-group-item active" aria-current="true">
+                                                        All Comments :
                                                     </li>
-                                                @endforeach
+                                                    @foreach ($users as $user)
+                                                        <li class="list-group-item">
+                                                            <i class="fa-regular fa-comment"></i>
+                                                            <span class="badge rounded-pill text-bg-primary ">
+                                                                {{ $user->pivot->created_at->format('Y-m-d') }}
+                                                            </span>
 
-                                            </ul>
+                                                            <span class=" badge bg-success rounded-pill ">
+                                                                {{ $user->name }} </span> :
+                                                            {{ $user->pivot->comment }}
+                                                        </li>
+                                                    @endforeach
 
-                                            <form action="{{ route('add_comment' , $project-> id ) }}"  method="post" >
-                                                @csrf 
-                                                <textarea name="comment" class="form-control mt-4 mb-4" cols="30" rows="10"
-                                                 placeholder="add comment..."></textarea>
-
-                                                <input type="submit" value="add comment" class="btn btn-primary "  name="submit" >
+                                                </ul>
+                                            @endif
+                                            <form action="{{ route('add_comment', $project->id) }}" method="post">
+                                                @csrf
+                                                  @error('comment')
+                                                  <div class="span text-danger">  {{$message }} </div>
+                                                @enderror
+                                                <textarea name="comment" class="form-control mt-4 mb-4" cols="30" rows="10" placeholder="add comment..."></textarea>
+                                              
+                                                <input type="submit" value="add comment" class="btn btn-primary "
+                                                    name="submit">
 
                                             </form>
 

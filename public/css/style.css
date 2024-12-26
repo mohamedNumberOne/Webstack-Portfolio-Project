@@ -2,6 +2,19 @@
     margin:  0 !important;
     padding: 0 !important;
 }
+*,
+
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+#work  .work-box {
+
+    min-height: 270px ;
+
+}
+
 .bg {
     width: 100%;
     background-image: url("bg.jpg") ;
@@ -430,6 +443,7 @@ h5,
 .h5 {
     font-size: 1.25rem;
 }
+ 
 
 h6,
 .h6 {
@@ -437,7 +451,7 @@ h6,
 }
 
 .lead {
-    font-size: 1.25rem;
+    font-size: 18px;
     font-weight: 300;
 }
 

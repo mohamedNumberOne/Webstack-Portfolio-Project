@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use Illuminate\Support\Facades\DB;
+ 
 
 class ProductController extends Controller
 {
@@ -14,13 +14,37 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view("products.add_product");
+         return  $all_products = $this-> show_all_products()  ;
+
     }
+
+    public function form_add_product()
+    {
+        return  view("products.add_product");
+    }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {}
+    public function display_product($id)
+    {
+
+
+      
+        $product = Product::findOrFail($id);
+
+        if (!$product) {
+            abort(404, 'Projet introuvable');
+        }
+ 
+        return view('products.info_product', compact('product' ));
+        //
+
+
+
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -30,7 +54,7 @@ class ProductController extends Controller
 
 
         if ($request->hasFile('photo') && $request->file('photo')->isValid()) {
-            $path = $request->file('photo')->store('images/products');
+            $path = $request->file('photo')->store('images/products' , 'public' );
             if ( $path ) {
                 Product::create([
 
@@ -54,9 +78,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show_all_products(    )
     {
-        //
+         return $all_products = Product::all() ;
     }
 
     /**
