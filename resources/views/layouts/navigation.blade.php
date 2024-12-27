@@ -16,11 +16,10 @@
 
 
                     @auth
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
                         @if (Auth::user()->role == 'admin')
-                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                                {{ __('Dashboard') }}
-                            </x-nav-link>
-
                             <x-nav-link :href="route('add_product')" :active="request()->routeIs('add_product')">
                                 {{ __('Add Product') }}
                             </x-nav-link>
@@ -28,14 +27,15 @@
                             <x-nav-link :href="route('add_project')" :active="request()->routeIs('add_project')">
                                 {{ __('Add Project') }}
                             </x-nav-link>
+                            <x-nav-link :href="route('show_messages')" :active="request()->routeIs('show_messages')">
+                                {{ __('Messages') }}
+                            </x-nav-link>
                         @endif
 
                         <x-nav-link :href="route('show_all_projects')" :active="request()->routeIs('show_all_projects')">
                             {{ __('Our Works') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('show_messages')" :active="request()->routeIs('show_messages')">
-                            {{ __('Messages') }}
-                        </x-nav-link>
+
                     @endauth
 
 
@@ -109,12 +109,12 @@
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
 
         @auth
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-responsive-nav-link>
+            </div>
             @if (Auth::user()->role == 'admin')
-                <div class="pt-2 pb-3 space-y-1">
-                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-responsive-nav-link>
-                </div>
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('add_product')" :active="request()->routeIs('add_product')">
                         {{ __('Add Product') }}
@@ -125,16 +125,17 @@
                         {{ __('Add Project') }}
                     </x-responsive-nav-link>
                 </div>
-            @endif
-            <div class="pt-2 pb-3 space-y-1">
-                <x-responsive-nav-link :href="route('show_all_projects')" :active="request()->routeIs('show_all_projects')">
-                    {{ __('Our Works') }}
-                </x-responsive-nav-link>
                 <div class="pt-2 pb-3 space-y-1">
                     <x-responsive-nav-link :href="route('show_messages')" :active="request()->routeIs('show_messages')">
                         {{ __('Messages') }}
                     </x-responsive-nav-link>
                 </div>
+            @endif
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('show_all_projects')" :active="request()->routeIs('show_all_projects')">
+                    {{ __('Our Works') }}
+                </x-responsive-nav-link>
+
             @endauth
             @auth
                 <!-- Responsive Settings Options -->
